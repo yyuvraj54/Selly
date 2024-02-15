@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:sellingportal/data/model/category_model.dart';
 import 'package:sellingportal/presentation/screens/screen/category/category_screen.dart';
 import 'package:sellingportal/presentation/widget/bottomBarIcons.dart';
@@ -53,10 +54,14 @@ class CardsCategory extends StatelessWidget {
                 ),
                 Expanded(
                   child: Text(
+
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                     categoryModel.title!,
-                    style: TextStyle(fontSize: 19, color: Colors.white),
+                    style:GoogleFonts.poppins(fontSize: 15,color: Colors.white),
+
+
+
                   ),
                 ),
               ],

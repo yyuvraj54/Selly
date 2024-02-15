@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 class BackgroundWave extends StatelessWidget {
   final double height;
    Color colors;
+
    BackgroundWave({Key? key, required this.height, required this.colors}) : super(key: key);
 
   @override
@@ -24,7 +25,9 @@ class BackgroundWave extends StatelessWidget {
               //   ],
               // ),
                 color: colors,
+
               ),
+
             ),
           )),
     );

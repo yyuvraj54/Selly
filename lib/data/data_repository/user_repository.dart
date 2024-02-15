@@ -14,14 +14,19 @@ class UserRepository
   Future<UserModel> createAccount({
     required String email,
     required String password,
+    required String name,
+    required String phoneNumber,
+
   }) async {
     try {
       Response response = await _api.sendRequest.post(
-          '/user/createAccount',
+          '/user/auth/signup',
           data: jsonEncode(
               {
+                "name":name,
                 "email": email,
-                "password": password
+                "password": password,
+                "phoneNumber":phoneNumber
               }
           )
       );

@@ -20,6 +20,7 @@ class CategoryProductCubit extends Cubit<CategoryProductState> {
     try {
       log(UserToken.token!);
       final products = await _productRepository.FetchProductByCategory(category.sId!, UserToken.token!);
+      products.sort((a, b) => b.createdAt!.compareTo(a.createdAt!));
       emit( CategoryProductLoadedState(products));
     }
     catch(ex) {

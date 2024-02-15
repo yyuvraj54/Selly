@@ -19,7 +19,7 @@ class ProductCubit extends Cubit<ProductState> {
 
   void _handUserState(UserState userState) {
     if (userState is UserLoggedInState) {
-      _initialize(UserToken.token.toString());
+      initialize(UserToken.token.toString());
     } else if (userState is UserLoggedOutState) {
       emit(ProductInitialState());
     }
@@ -27,11 +27,12 @@ class ProductCubit extends Cubit<ProductState> {
 
   final ProductRepository _productRepository = ProductRepository();
 
-  void _initialize(String BEARER_TOKN) async {
+  void initialize(String BEARER_TOKN) async {
     emit(ProductLoadingState(state.products));
     try {
       List<ProductModel> products =
           await _productRepository.FetchAllProduct(BEARER_TOKN);
+      products.sort((a, b) => b.createdAt!.compareTo(a.createdAt!));
       emit(ProductLoadedState(products));
     } catch (error) {
       emit(ProductErrorState(error.toString(), state.products));
