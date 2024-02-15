@@ -25,6 +25,8 @@ class UserCubit extends Cubit<UserState> {
   void _initialize() async{
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
     UserToken.token = await sharedPreferences.getString('token');
+    UserToken.name = await sharedPreferences.getString('name');
+
 
 
     final userDetail = await Preferences.getUserDetail();
@@ -52,6 +54,8 @@ class UserCubit extends Cubit<UserState> {
       await _userRepository.login(email: email, password: password);
       _emitLoggedInState(
           email: email, password: password, userModel: userModel);
+      SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+      sharedPreferences.setString('name', userModel.name!);
     } catch (error) {
       emit(UserErrorState(error.toString()));
     }

@@ -56,6 +56,7 @@ class UserRepository
       List bearerToken = response.headers['Authorization']!;
 SharedPreferences sharedPreferencesInstance = await SharedPreferences.getInstance();
 await sharedPreferencesInstance.setString('token', bearerToken[0].toString());
+
       if (!apiResponse.success) {
         throw apiResponse.message.toString();
       }

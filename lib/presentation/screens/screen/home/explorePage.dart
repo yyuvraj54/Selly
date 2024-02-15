@@ -6,6 +6,8 @@ import 'package:sellingportal/logic/cubits/category/category_cubit.dart';
 import 'package:sellingportal/logic/cubits/category/category_state.dart';
 import 'package:sellingportal/logic/cubits/products/Product_state.dart';
 import 'package:sellingportal/logic/cubits/products/product_cubit.dart';
+import 'package:sellingportal/logic/cubits/user/userToke.dart';
+import 'package:sellingportal/logic/cubits/user/user_cubit.dart';
 import 'package:sellingportal/presentation/widget/cards.dart';
 import 'package:sellingportal/presentation/widget/itemCard.dart';
 import 'package:sellingportal/presentation/widget/searchBar.dart';
@@ -20,6 +22,7 @@ class explorePage extends StatelessWidget {
 static const String routeName = 'explorePage';
   @override
   Widget build(BuildContext context) {
+
     List<String> categName = [
       'Books',
       'Gadgets',
@@ -44,7 +47,7 @@ static const String routeName = 'explorePage';
                       ),
                       Positioned(
                         top: MediaQuery.of(context).padding.top + 20,
-                        child: const SearchBarCustom(),
+                        child: SearchBarCustom(title: UserToken.name,),
                         left: 16,
                         right: 16,
                       ),
@@ -71,9 +74,10 @@ static const String routeName = 'explorePage';
                                   itemCount: 4,
                                   shrinkWrap: false,
                                   itemBuilder: (BuildContext context, int index) {
+                                    final category = state.categories[index];
                                     return CardsCategory(
                                       index: index,
-                                      categName: state.categories[index].title!,
+                                      categoryModel:category ,
                                     );
                                   },
                                 );

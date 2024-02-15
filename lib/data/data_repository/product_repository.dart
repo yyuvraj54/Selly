@@ -26,10 +26,13 @@ class ProductRepository {
     }
   }
 
-  Future<List<ProductModel>> FetchProductByCategory(String categoryId) async {
+  Future<List<ProductModel>> FetchProductByCategory(
+      String categoryId, String TOKEN) async {
     try {
-      Response response =
-          await _api.sendRequest.get('/product/cat/${categoryId}');
+      Response response = await _api.sendRequest.get(
+        'user/listing/getListing/category/${categoryId}',
+        options: Options(headers: {'Authorization': TOKEN}),
+      );
       ApiResponse apiResponse = ApiResponse.fromResponse(response);
       if (!apiResponse.success) {
         throw apiResponse.message.toString();
@@ -42,11 +45,12 @@ class ProductRepository {
     }
   }
 
-  Future<ProductModel> AddProducts(ProductModel productModel,String BEARER_TOKEN) async {
+  Future<ProductModel> AddProducts(
+      ProductModel productModel, String BEARER_TOKEN) async {
     try {
       Response response = await _api.sendRequest.post(
         'user/listing/create',
-        options: Options(headers: {'Authorization':BEARER_TOKEN}),
+        options: Options(headers: {'Authorization': BEARER_TOKEN}),
         data: jsonEncode(
           productModel.toJson(),
         ),

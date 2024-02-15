@@ -46,7 +46,7 @@ class SliverSearchAppBar extends SliverPersistentHeaderDelegate {
           ),
           Positioned(
             top: topPadding + offset,
-            child: const SearchBarCustom(),
+            child:  SearchBarCustom(title: 'djugh',),
             left: 16,
             right: 16,
           ),

@@ -22,6 +22,7 @@ void main() async{
   WidgetsFlutterBinding.ensureInitialized();
  // Preferences.clear();
   Bloc.observer = MyBlocObserver();
+
   runApp(const MyApp());
 }
 
@@ -36,6 +37,7 @@ class MyApp extends StatelessWidget {
        BlocProvider(create: (context)=>UserCubit()),
         BlocProvider(create: (context)=>CategoryCubit(userCubit: BlocProvider.of<UserCubit>(context))),
         BlocProvider(create: (context)=>ProductCubit(userCubit: BlocProvider.of<UserCubit>(context))),
+
       ],
       child: MaterialApp(
         onGenerateRoute: Routes.onGenerateRoute,
