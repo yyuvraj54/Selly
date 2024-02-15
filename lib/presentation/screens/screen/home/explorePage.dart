@@ -17,9 +17,15 @@ import '../../../../res/drawable/backgroundWave.dart';
 
 
 
-class explorePage extends StatelessWidget {
+class explorePage extends StatefulWidget {
   const explorePage({super.key});
 static const String routeName = 'explorePage';
+
+  @override
+  State<explorePage> createState() => _explorePageState();
+}
+
+class _explorePageState extends State<explorePage> {
   @override
   Widget build(BuildContext context) {
 
@@ -32,106 +38,114 @@ static const String routeName = 'explorePage';
 
     return Scaffold(
         resizeToAvoidBottomInset: false,
-        body: SingleChildScrollView(
-          child: Container(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                SizedBox(
-                  height: 320,
-                  child: Stack(
-                    children: [
-                      BackgroundWave(
-                        colors: Color.fromRGBO(23, 16, 193, 1),
-                        height: 280,
-                      ),
-                      Positioned(
-                        top: MediaQuery.of(context).padding.top + 20,
-                        child: SearchBarCustom(title: UserToken.name,),
-                        left: 16,
-                        right: 16,
-                      ),
-                      Positioned(
-                        // top: MediaQuery.of(context).padding.top + 100,
-                        top: 220,
-                        child: Padding(
-                          padding: const EdgeInsets.only(top: 8.0),
-                          child: SizedBox(
-                            width: MediaQuery.of(context).size.width,
-                            height: 85,
-                            child: BlocBuilder<CategoryCubit,CategoryState>(
-                              builder: (context,state) {
-                                if (state is CategoryLoadingState && state.categories.isEmpty) {
-                                  return CircularProgressIndicator();
-                                }
-                                if (state is CategoryErrorState && state.categories.isEmpty) {
-                                  return Center(
-                                    child: Text(state.message.toString()),
-                                  );
-                                }
-                                return ListView.builder(
-                                  scrollDirection: Axis.horizontal,
-                                  itemCount: 4,
-                                  shrinkWrap: false,
-                                  itemBuilder: (BuildContext context, int index) {
-                                    final category = state.categories[index];
-                                    return CardsCategory(
-                                      index: index,
-                                      categoryModel:category ,
+        body: RefreshIndicator(
+          onRefresh: () async{
+
+            setState(() {
+              return BlocProvider.of<ProductCubit>(context).initialize(UserToken.token!);
+            });
+          },
+          child: SingleChildScrollView(
+            child: Container(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  SizedBox(
+                    height: 320,
+                    child: Stack(
+                      children: [
+                        BackgroundWave(
+                          colors: Color.fromRGBO(74, 67, 236, 1),
+                          height: 280,
+                        ),
+                        Positioned(
+                          top: MediaQuery.of(context).padding.top + 20,
+                          child: SearchBarCustom(title: UserToken.name,),
+                          left: 16,
+                          right: 16,
+                        ),
+                        Positioned(
+                          // top: MediaQuery.of(context).padding.top + 100,
+                          top: 220,
+                          child: Padding(
+                            padding: const EdgeInsets.only(top: 8.0),
+                            child: SizedBox(
+                              width: MediaQuery.of(context).size.width,
+                              height: 85,
+                              child: BlocBuilder<CategoryCubit,CategoryState>(
+                                builder: (context,state) {
+                                  if (state is CategoryLoadingState && state.categories.isEmpty) {
+                                    return CircularProgressIndicator();
+                                  }
+                                  if (state is CategoryErrorState && state.categories.isEmpty) {
+                                    return Center(
+                                      child: Text(state.message.toString()),
                                     );
-                                  },
-                                );
-                              },
+                                  }
+                                  return ListView.builder(
+                                    scrollDirection: Axis.horizontal,
+                                    itemCount: 4,
+                                    shrinkWrap: false,
+                                    itemBuilder: (BuildContext context, int index) {
+                                      final category = state.categories[index];
+                                      return CardsCategory(
+                                        index: index,
+                                        categoryModel:category ,
+                                      );
+                                    },
+                                  );
+                                },
+                              ),
                             ),
                           ),
                         ),
-                      ),
-                    ],
-                  ),
-                ),
-
-
-                Padding(
-                  padding: const EdgeInsets.only(top: 10, left: 10),
-                  child: Text(
-                    'New Items',
-                    style: TextStyle(
-                      fontSize: 25,
+                      ],
                     ),
                   ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(top: 8.0),
-                  child: Container(
-                    child: BlocBuilder<ProductCubit,ProductState>(
-                      builder: (context,state) {
-                        if (state is ProductLoadingState && state.products.isEmpty) {
-                          return Center(child: CircularProgressIndicator());
-                        }
-                        if (state is ProductErrorState && state.products.isEmpty) {
-                          return Center(
-                            child: Text(state.message.toString(),),
+
+
+                  Padding(
+                    padding: const EdgeInsets.only(top: 10, left: 10),
+                    child: Text(
+                      'New Items',
+                      style: TextStyle(
+                        fontSize: 25,
+                      ),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(top: 8.0),
+                    child: Container(
+                      child: BlocBuilder<ProductCubit,ProductState>(
+                        builder: (context,state) {
+                          if (state is ProductLoadingState && state.products.isEmpty) {
+                            return Center(child: CircularProgressIndicator());
+                          }
+                          if (state is ProductErrorState && state.products.isEmpty) {
+                            return Center(
+                              child: Text(state.message.toString(),),
+                            );
+                          }
+                          return GridView.builder(
+                            padding: EdgeInsets.only(bottom: 110),
+                            physics: NeverScrollableScrollPhysics(),
+                            itemCount: state.products.length,
+                            shrinkWrap: true,
+                            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                              childAspectRatio: 0.8,
+                              crossAxisCount: 2,
+                            ),
+                            itemBuilder: (BuildContext context, int index) {
+                              final product = state.products[index];
+                              return cardItem(productModel: product,);
+                            },
                           );
                         }
-                        return GridView.builder(
-                          padding: EdgeInsets.only(bottom: 110),
-                          physics: NeverScrollableScrollPhysics(),
-                          itemCount: state.products.length,
-                          shrinkWrap: true,
-                          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                            childAspectRatio: 0.8,
-                            crossAxisCount: 2,
-                          ),
-                          itemBuilder: (BuildContext context, int index) {
-                            final product = state.products[index];
-                            return cardItem(productModel: product,);
-                          },
-                        );
-                      }
+                      ),
                     ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
         )

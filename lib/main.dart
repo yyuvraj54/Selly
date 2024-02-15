@@ -13,6 +13,8 @@ import 'package:sellingportal/logic/cubits/products/product_cubit.dart';
 import 'package:sellingportal/logic/cubits/user/user_cubit.dart';
 import 'package:sellingportal/logic/services/preferences.dart';
 import 'package:sellingportal/presentation/screens/Auth/loginPage.dart';
+import 'package:sellingportal/presentation/screens/screen/profile/profile_screen.dart';
+import 'package:sellingportal/presentation/screens/screen/settingsScreen/registrationPage.dart';
 import 'package:sellingportal/presentation/screens/splash/splash_screen.dart';
 
 import 'package:sellingportal/presentation/widget/cards.dart';
@@ -42,6 +44,7 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         onGenerateRoute: Routes.onGenerateRoute,
         initialRoute: SplashScreen.routeName,
+        // home: registration(),
          
       ),
     );

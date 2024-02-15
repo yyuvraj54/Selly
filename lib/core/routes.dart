@@ -18,6 +18,7 @@ import 'package:sellingportal/presentation/screens/screen/home/explorePage.dart'
 import 'package:sellingportal/presentation/screens/screen/home/homescreen.dart';
 import 'package:sellingportal/presentation/screens/screen/home/productPage2.dart';
 import 'package:sellingportal/presentation/screens/screen/productPage.dart';
+import 'package:sellingportal/presentation/screens/screen/profile/profile_screen.dart';
 import 'package:sellingportal/presentation/screens/screen/sellFormScreens/stepperMainPage.dart';
 import 'package:sellingportal/presentation/screens/screen/sellPage.dart';
 
@@ -42,6 +43,8 @@ class Routes {
         return CupertinoPageRoute(builder: (context) => sellPage());
       case categoryPage.routeName:
         return CupertinoPageRoute(builder: (context)=>BlocProvider(create: (context)=>CategoryProductCubit(settings.arguments as CategoryModel),child: categoryPage()));
+      case ProfileScreen.routeName:
+        return CupertinoPageRoute(builder: (context)=>ProfileScreen());
         default:
         return null;
     }

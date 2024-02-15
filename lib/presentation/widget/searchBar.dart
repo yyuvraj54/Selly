@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:sellingportal/logic/cubits/user/user_cubit.dart';
 import 'package:sellingportal/logic/cubits/user/user_state.dart';
+import 'package:sellingportal/presentation/screens/screen/profile/profile_screen.dart';
 
 class SearchBarCustom extends StatelessWidget {
   String? title;
@@ -28,7 +29,7 @@ class SearchBarCustom extends StatelessWidget {
                 Text("Hi, ${title!} 👋",style: TextStyle(fontSize: 20,color: Colors.white),),
               ],
             ),
-            IconButton(onPressed: (){}, icon: Icon(FontAwesomeIcons.user,color: Colors.white,)),
+            IconButton(onPressed: (){Navigator.pushNamed(context, ProfileScreen.routeName);}, icon: Icon(FontAwesomeIcons.user,color: Colors.white,)),
 
           ],),
           SizedBox(height: 30,),
