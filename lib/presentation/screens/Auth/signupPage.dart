@@ -42,6 +42,11 @@ class signup extends StatelessWidget {
                   controller: provider.nameController,
                   style: commonTextsStyle(),
                   decoration: commonInputDecoration(labelText: "Full Name"),
+                  validator: (value) {
+                    if (value == null || value.trim() == '') {
+                      return "Name is required";
+                    }
+                  },
                 ),
               ),
               Container(
@@ -51,6 +56,11 @@ class signup extends StatelessWidget {
                   style: commonTextsStyle(),
                   keyboardType: TextInputType.number,
                   decoration: commonInputDecoration(labelText: "Phone"),
+               validator: (value) {
+              if (value == null || value.trim() == '') {
+              return "Phone is required";
+              }
+              },
                 ),
               ),
               Container(
