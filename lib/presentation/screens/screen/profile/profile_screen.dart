@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
+import 'package:sellingportal/logic/cubits/user/user_cubit.dart';
 import 'package:sellingportal/res/drawable/backgroundWave.dart';
 
 class ProfileScreen extends StatefulWidget {
@@ -36,7 +39,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 child: Container(
               // color: Colors.green,
               child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   ProfileUserCard(title: 'Aman', desc: 'desc'),
 
@@ -66,6 +69,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             Container(height: 1,width: double.infinity,color: Color.fromRGBO(0, 0, 0, 0.1),),
                             SizedBox(height: 10,),
                             ProfileItem(icons: FontAwesomeIcons.inbox, title: 'Requests'),
+
                             
                           ],
                         ),
@@ -73,6 +77,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     ),
 
 
+                  ),
+                  SizedBox(height: 10,),
+                  Padding(
+                    padding: const EdgeInsets.only(left: 20),
+                    child: TextButton(onPressed: (){BlocProvider.of<UserCubit>(context).signOut();}, child: Text("Signout",style: GoogleFonts.poppins(color: Colors.red,fontWeight: FontWeight.w400),)),
                   )
                 ],
               ),

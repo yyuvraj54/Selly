@@ -111,7 +111,7 @@ class LoginPage extends StatelessWidget {
                           children: [
 
                             Text("Don’t have an account? ", style: commonTextsStyle(fontsize: 15.0),),
-                            GestureDetector(onTap: () {Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => signup()),);},
+                            GestureDetector(onTap: () {Navigator.pushNamed(context, signup.routeName);},
                               child: Text('Sign up', style: commonTextsStyle(color: Color(0xFF2591EA)),),
                             ),
                           ],

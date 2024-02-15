@@ -43,7 +43,7 @@ class UserModel {
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['_id'] = this.sId;
+    // data['_id'] = this.sId;
     data['name'] = this.name;
     data['email'] = this.email;
     data['phoneNumber'] = this.phoneNumber;
@@ -52,9 +52,9 @@ class UserModel {
     // data['request'] = this.requests;
     // data['products'] = this.products;
     // data['itemsBought'] = this.itemsBought;
-    data['createdAt'] = this.createdAt;
-    data['updatedAt'] = this.updatedAt;
-    data['__v'] = this.iV;
+    // data['createdAt'] = this.createdAt;
+    // data['updatedAt'] = this.updatedAt;
+    // data['__v'] = this.iV;
     return data;
   }
 }

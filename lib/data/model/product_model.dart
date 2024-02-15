@@ -60,7 +60,7 @@ class ProductModel {
     data['description'] = this.description;
     data['Price'] = this.price;
     data['photos'] = this.photos ?? [""];
-    data['condition'] = this.condition;
+    data['condition'] = this.condition ?? "New";
     // data['ListedBy'] = this.listedBy ;
     data['status'] = this.status ?? "available";
     data['category'] = this.category;

@@ -36,7 +36,12 @@ class signup extends StatelessWidget {
                       fontWeight: FontWeight.bold,
                       fontFamily: "Poppins"),
                 ),
-              ),
+              ), (provider.error != "")
+                  ? Text(
+                provider.error,
+                style: TextStyle(color: Colors.red),
+              )
+                  : SizedBox(),
               Container(
                 margin: EdgeInsets.only(top: screenHeight * 0.02),
                 child: TextFormField(
@@ -84,7 +89,7 @@ class signup extends StatelessWidget {
               Container(
                 margin: EdgeInsets.only(top: screenHeight * 0.02),
                 child: TextFormField(
-                  controller: passwordController,
+                  controller: provider.passwordController,
                   style: commonTextsStyle(),
                   obscureText: true,
                   decoration: commonInputDecoration(labelText: "Password"),
@@ -129,7 +134,7 @@ class signup extends StatelessWidget {
                                     commonTextsStyle(color: Color(0xFF2591EA)),
                               ),
                               onTap: () {
-                                Navigator.pushNamed(context, LoginPage.routeName);
+                                Navigator.pushReplacementNamed(context, LoginPage.routeName);
                               }),
                         ],
                       ),

@@ -44,7 +44,7 @@ class MyApp extends StatelessWidget {
       ],
       child: MaterialApp(
         onGenerateRoute: Routes.onGenerateRoute,
-        initialRoute: signup.routeName,
+        initialRoute: SplashScreen.routeName,
         // home: registration(),
          
       ),

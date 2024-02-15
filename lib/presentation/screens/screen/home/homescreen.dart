@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:animated_notch_bottom_bar/animated_notch_bottom_bar/animated_notch_bottom_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -14,6 +15,8 @@ import 'package:sellingportal/presentation/widget/bottomBarIcons.dart';
 import 'package:sellingportal/res/colors/colors.dart';
 import 'package:sellingportal/res/drawable/bottom_clipper.dart';
 
+import '../../../../logic/cubits/user/user_state.dart';
+import '../../splash/splash_screen.dart';
 import 'explorePage.dart';
 
 class homeScreen extends StatefulWidget {

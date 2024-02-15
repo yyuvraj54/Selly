@@ -27,7 +27,7 @@ class _SplashScreenState extends State<SplashScreen> {
     }
     if(userState is UserLoggedOutState){
       Navigator.popUntil(context, (route) => route.isFirst);
-      Navigator.pushReplacementNamed(context,LoginPage.routeName);
+      Navigator.pushReplacementNamed(context, LoginPage.routeName);
     }
   }
   @override

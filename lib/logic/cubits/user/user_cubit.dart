@@ -6,6 +6,8 @@
 //so data[repository] ke sare functions available karan padenge.. CUBIT me
 //ki presentation bhi use kar sake
 
+import 'dart:developer';
+
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sellingportal/logic/cubits/user/userToke.dart';
 import 'package:sellingportal/logic/cubits/user/user_state.dart';
@@ -43,6 +45,7 @@ class UserCubit extends Cubit<UserState> {
       {required String email,
         required String password,
         required UserModel userModel}) async {
+
     await Preferences.saveUserDetail(email, password);
     emit(UserLoggedInState(userModel));
 
@@ -68,6 +71,7 @@ class UserCubit extends Cubit<UserState> {
       _emitLoggedInState(
           email: email, password: password, userModel: userModel);
     } catch (error) {
+      log(error.toString());
       emit(UserErrorState(error.toString()));
     }
   }

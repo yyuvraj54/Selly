@@ -35,7 +35,8 @@ class SignupProvider with ChangeNotifier{
     String email = emailController.text.trim();
     String password = passwordController.text.trim();
     String name = nameController.text.trim();
-    String phoneNumber = phoneNumberController.text.trim();
+    int phoneNumber = int.tryParse(phoneNumberController.text.trim())!;
+
 
     BlocProvider.of<UserCubit>(context).createAccount(email: email, password: password, name: name, phoneNumber: phoneNumber);
     //abhi bhi half baked hai ye.. signin hone ke bad kya state milra h. iska toh hme abi kuch pata chal nai ra.

@@ -33,7 +33,7 @@ class FormPage extends StatefulWidget {
 class _FormPageState extends State<FormPage> {
   int currentStep = 0;
   List<String> _imagePaths = [];
-  String _selectedCondition = '';
+  String _selectedCondition = 'New';
 
   void _updateImagePaths(List<String> paths) {
     setState(() {
@@ -158,7 +158,10 @@ class _FormPageState extends State<FormPage> {
                   _selectedCondition = condition;
                 });
                 // Assign the selected condition to your productModel or handle it as per your logic
-              productModel.condition = condition;
+              productModel.condition = _selectedCondition;
+              log(_selectedCondition);
+              log(condition);
+
               },
             ),
       ]),
