@@ -17,6 +17,7 @@ import 'package:sellingportal/presentation/screens/screen/home/homescreen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../../../../logic/cubits/user/userToke.dart';
 import 'CustomInput.dart';
+import 'CustomRadioBtn.dart';
 import 'image_picker_button.dart';
 import 'image_display_container.dart';
 
@@ -32,6 +33,7 @@ class FormPage extends StatefulWidget {
 class _FormPageState extends State<FormPage> {
   int currentStep = 0;
   List<String> _imagePaths = [];
+  String _selectedCondition = '';
 
   void _updateImagePaths(List<String> paths) {
     setState(() {
@@ -146,13 +148,20 @@ class _FormPageState extends State<FormPage> {
                 productModel.description = value;
               },
             ),
-            CustomInput(
-              hint: "Condition*",
-              inputBorder: OutlineInputBorder(),
-              onChanged: (value) {
-                productModel.condition = value;
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text('Condition', style: commonTextsStyle(fontsize: 12),),
+            SizedBox(height: 8),
+            CustomRadioButton(options: ['New', 'Slightly Used', 'Old'], onChanged: (condition) {
+              setState(() {
+                  _selectedCondition = condition;
+                });
+                // Assign the selected condition to your productModel or handle it as per your logic
+              productModel.condition = condition;
               },
             ),
+      ]),
             CustomInput(
               hint: "Category*",
               inputBorder: OutlineInputBorder(),
@@ -244,3 +253,8 @@ class _FormPageState extends State<FormPage> {
         fontFamily: "Poppins");
   }
 }
+
+void main() {
+  runApp(FormPage());
+}
+
