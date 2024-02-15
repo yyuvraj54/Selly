@@ -15,6 +15,7 @@ import 'package:sellingportal/presentation/screens/Auth/loginPage.dart';
 import 'package:sellingportal/presentation/screens/Auth/provider/login_provider.dart';
 import 'package:sellingportal/presentation/screens/Auth/provider/signup_provider.dart';
 import 'package:sellingportal/presentation/screens/Auth/signupPage.dart';
+import 'package:sellingportal/presentation/screens/screen/category/categoryPage.dart';
 import 'package:sellingportal/presentation/screens/screen/category/category_screen.dart';
 import 'package:sellingportal/presentation/screens/screen/home/explorePage.dart';
 import 'package:sellingportal/presentation/screens/screen/home/homescreen.dart';
@@ -40,7 +41,7 @@ class Routes {
       case productScreen.routeName:
         return CupertinoPageRoute(builder: (context)=>productScreen(productModel: settings.arguments as ProductModel));
       case FormPage.routeName:
-        return CupertinoPageRoute(builder: (context)=>BlocProvider(create: (context)=>ProductUploadCubit(),child: FormPage()));
+        return CupertinoPageRoute(builder: (context)=>BlocProvider(create: (context)=>ProductUploadCubit(),child: FormPage(catId: settings.arguments as String)));
       case sellPage.routeName:
         return CupertinoPageRoute(builder: (context) => sellPage());
       case categoryPage.routeName:
@@ -49,6 +50,9 @@ class Routes {
         return CupertinoPageRoute(builder: (context)=>ProfileScreen());
       case signup.routeName:
         return CupertinoPageRoute(builder: (context)=>ChangeNotifierProvider(create:(context)=>(SignupProvider(context)),child: signup()));
+
+      case CategorySelectionPage.routeName:
+        return CupertinoPageRoute(builder: (context)=>CategorySelectionPage());
         default:
         return null;
     }

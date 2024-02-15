@@ -1,40 +1,35 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:sellingportal/logic/cubits/category/category_cubit.dart';
+import 'package:sellingportal/presentation/screens/screen/sellFormScreens/stepperMainPage.dart';
+import 'package:sellingportal/presentation/widget/bottomBarIcons.dart';
 
-void main() {
-  runApp(MyApp());
-}
-
-class MyApp extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(title: 'Category Selection', theme: ThemeData(primarySwatch: Colors.blue,),
-      home: CategorySelectionPage(),
-    );
-  }
-}
 
 class CategorySelectionPage extends StatelessWidget {
+  static const String routeName = "CategorySelectionPage";
   final List<CategoryOption> categories = [
     CategoryOption(
-      title: 'Books',
-      icon: Icons.book,
+      title: 'Gadgets',
+      icon: FontAwesomeIcons.calculator,
     ),
     CategoryOption(
-      title: 'Gadgets',
-      icon: Icons.phone,
+      title: 'Books',
+      icon: FontAwesomeIcons.book,
     ),
     CategoryOption(
       title: 'Room Essentials',
-      icon: Icons.home,
+      icon: FontAwesomeIcons.bed,
     ),
     CategoryOption(
       title: 'Kitchen Appliances',
-      icon: Icons.kitchen,
+      icon: Icons.microwave,
     ),
   ];
-
+  categoryIcons catIcon = categoryIcons();
   @override
   Widget build(BuildContext context) {
+    final cubit = BlocProvider.of<CategoryCubit>(context);
     return Scaffold(
       appBar: AppBar(
         title: Text('Select a Category'),
@@ -45,10 +40,12 @@ class CategorySelectionPage extends StatelessWidget {
           crossAxisCount: 2,
           crossAxisSpacing: 8.0,
           mainAxisSpacing: 8.0,
-          children: List.generate(categories.length, (index) {
+          children: List.generate(cubit.state.categories.length, (index) {
+            final category = cubit.state.categories[index];
             return CategoryCard(
-              title: categories[index].title,
+              title: category.title!,
               icon: categories[index].icon,
+              catid: category.sId!,
             );
           }),
         ),
@@ -60,8 +57,9 @@ class CategorySelectionPage extends StatelessWidget {
 class CategoryCard extends StatelessWidget {
   final String title;
   final IconData icon;
+  final String catid;
 
-  const CategoryCard({required this.title, required this.icon});
+  const CategoryCard({required this.title, required this.icon,required this.catid});
 
   @override
   Widget build(BuildContext context) {
@@ -74,6 +72,7 @@ class CategoryCard extends StatelessWidget {
       child: InkWell(
         onTap: () {
           // Handle category selection here
+          Navigator.pushNamed(context, FormPage.routeName,arguments: catid);
         },
         child: Padding(
           padding: const EdgeInsets.all(16.0),

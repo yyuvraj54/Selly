@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:sellingportal/presentation/screens/screen/category/categoryPage.dart';
 
 import 'package:sellingportal/presentation/screens/screen/home/chatPage.dart';
 import 'package:sellingportal/presentation/screens/screen/home/myAccountsPage.dart';
@@ -31,9 +32,9 @@ class homeScreen extends StatefulWidget {
 class _homeScreenState extends State<homeScreen> {
   final _controllerBottom = NotchBottomBarController(index: 0);
   int currentIndex = 0;
+
   @override
   Widget build(BuildContext context) {
-
     BottomBarIcons bottomBarIconsInactive = BottomBarIcons(colorIndex: 0);
     BottomBarIcons bottomBarIconsActive = BottomBarIcons(colorIndex: 1);
 
@@ -99,13 +100,16 @@ class _homeScreenState extends State<homeScreen> {
       // ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: FloatingActionButton(
-
         onPressed: () {
-          Navigator.pushNamed(context, FormPage.routeName);
+          Navigator.pushNamed(
+            context,
+            // FormPage.routeName,
+            CategorySelectionPage.routeName,
+
+          );
         },
         child: Icon(Icons.add),
       ),
-
 
       // bottomNavigationBar: BottomNavigationBar(
       //     currentIndex: 0,
@@ -123,18 +127,21 @@ class _homeScreenState extends State<homeScreen> {
       // ])
       bottomNavigationBar: NavigationBar(
           selectedIndex: currentIndex,
-          onDestinationSelected: (index){
+          onDestinationSelected: (index) {
             currentIndex = index;
             _pageViewController.jumpToPage(currentIndex);
-            setState(() {},
+            setState(
+              () {},
             );
           },
           destinations: [
-        NavigationDestination(
-            icon: bottomBarIconsActive.bottomBarIconsList[0], label: 'explore'),
-        NavigationDestination(
-            icon: bottomBarIconsActive.bottomBarIconsList[1], label: 'explore'),
-      ]),
+            NavigationDestination(
+                icon: bottomBarIconsActive.bottomBarIconsList[0],
+                label: 'explore'),
+            NavigationDestination(
+                icon: bottomBarIconsActive.bottomBarIconsList[1],
+                label: 'explore'),
+          ]),
     );
   }
 }

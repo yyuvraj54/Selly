@@ -23,8 +23,9 @@ import 'image_display_container.dart';
 
 class FormPage extends StatefulWidget {
   static const String routeName = 'FormPage';
+  String catId;
 
-   FormPage({Key? key}) : super(key: key);
+   FormPage({Key? key,required this.catId}) : super(key: key);
 
   @override
   _FormPageState createState() => _FormPageState();
@@ -100,7 +101,7 @@ class _FormPageState extends State<FormPage> {
                     if (isLastStep) {
                       // Do something with this information
                       // productModel.listedBy = state.userModel.sId;
-
+                      productModel.category = widget.catId;
                       BlocProvider.of<ProductUploadCubit>(context).addToProductListings(productModel,UserToken.token.toString());
                       // Navigator.pushReplacementNamed(context,explorePage.routeName );
                       // Navigator.pushReplacementNamed(context, homeScreen.routeName);
@@ -165,13 +166,13 @@ class _FormPageState extends State<FormPage> {
               },
             ),
       ]),
-            CustomInput(
-              hint: "Category*",
-              inputBorder: OutlineInputBorder(),
-              onChanged: (value) {
-                productModel.category = value;
-              },
-            ),
+            // CustomInput(
+            //   hint: "Category*",
+            //   inputBorder: OutlineInputBorder(),
+            //   onChanged: (value) {
+            // //     productModel.category = value;
+            // },
+            // ),
             CustomInput(
               hint: "Tags*",
               inputBorder: OutlineInputBorder(),
@@ -257,7 +258,4 @@ class _FormPageState extends State<FormPage> {
   }
 }
 
-void main() {
-  runApp(FormPage());
-}
 
