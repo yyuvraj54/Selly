@@ -96,11 +96,13 @@ class _homeScreenState extends State<homeScreen> {
       // ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: FloatingActionButton(
+
         onPressed: () {
           Navigator.pushNamed(context, FormPage.routeName);
         },
         child: Icon(Icons.add),
       ),
+
 
       // bottomNavigationBar: BottomNavigationBar(
       //     currentIndex: 0,
