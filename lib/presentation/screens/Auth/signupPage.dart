@@ -1,3 +1,4 @@
+import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:sellingportal/presentation/screens/Auth/loginPage.dart';
@@ -56,11 +57,11 @@ class signup extends StatelessWidget {
                   style: commonTextsStyle(),
                   keyboardType: TextInputType.number,
                   decoration: commonInputDecoration(labelText: "Phone"),
-               validator: (value) {
-              if (value == null || value.trim() == '') {
-              return "Phone is required";
-              }
-              },
+                  validator: (value) {
+                    if (value == null || value.trim() == '') {
+                      return "Phone is required";
+                    }
+                  },
                 ),
               ),
               Container(
@@ -70,20 +71,29 @@ class signup extends StatelessWidget {
                   controller: provider.emailController,
                   decoration: commonInputDecoration(labelText: "Email"),
                   validator: (value) {
-                    validateUsername(value);
+                    if(value==null|| value.trim() ==""){
+                      return "Email address is required";
+                    }
+                    if(!EmailValidator.validate(value)){
+                      return "Invalid email address";
+                    }
+
                   },
                 ),
               ),
               Container(
                 margin: EdgeInsets.only(top: screenHeight * 0.02),
                 child: TextFormField(
-                    controller: passwordController,
-                    style: commonTextsStyle(),
-                    obscureText: true,
-                    decoration: commonInputDecoration(labelText: "Password"),
-                    validator: (value) {
-                      validatePassword(value);
-                    }),
+                  controller: passwordController,
+                  style: commonTextsStyle(),
+                  obscureText: true,
+                  decoration: commonInputDecoration(labelText: "Password"),
+                  validator: (value) {
+                    if (value == null || value.trim() == '') {
+                      return "Password is required";
+                    }
+                  },
+                ),
               ),
               Container(
                 margin: EdgeInsets.only(top: screenHeight * 0.02),
@@ -119,11 +129,7 @@ class signup extends StatelessWidget {
                                     commonTextsStyle(color: Color(0xFF2591EA)),
                               ),
                               onTap: () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => LoginPage()),
-                                );
+                                Navigator.pushNamed(context, LoginPage.routeName);
                               }),
                         ],
                       ),
