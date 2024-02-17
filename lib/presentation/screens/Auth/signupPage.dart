@@ -128,11 +128,7 @@ class signup extends StatelessWidget {
                           ),
                           SizedBox(width: 8.0),
                           GestureDetector(
-                              child: Text(
-                                'Login',
-                                style:
-                                    commonTextsStyle(color: Color(0xFF2591EA)),
-                              ),
+                              child: Text('Login', style: commonTextsStyle(color: Color(0xFF2591EA)),),
                               onTap: () {
                                 Navigator.pushReplacementNamed(context, LoginPage.routeName);
                               }),

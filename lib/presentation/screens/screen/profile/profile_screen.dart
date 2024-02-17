@@ -4,6 +4,9 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:sellingportal/logic/cubits/user/user_cubit.dart';
+import 'package:sellingportal/presentation/screens/screen/Myitems.dart';
+import 'package:sellingportal/presentation/screens/screen/WishList.dart';
+import 'package:sellingportal/presentation/screens/screen/settingsScreen/registrationPage.dart';
 import 'package:sellingportal/res/drawable/backgroundWave.dart';
 
 class ProfileScreen extends StatefulWidget {
@@ -23,17 +26,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
         backgroundColor: Color.fromRGBO(249, 249, 249, 1),
         body: Column(
           children: [
-            Stack(children: [
-              Container(
-                height: height * .20,
-                // color: Colors.red,
-                child: BackgroundWave(
-                    height: height * 20,
-                    colors: Color.fromRGBO(74, 67, 236, 1)),
-              ),
-              AppBar(
-                backgroundColor: Color.fromRGBO(74, 67, 236, 1),
-              )
+            Stack(children: [Container(height: height * .20, child: BackgroundWave(height: height * 20, colors: Color.fromRGBO(74, 67, 236, 1)),),
+              AppBar(backgroundColor: Color.fromRGBO(74, 67, 236, 1),)
             ]),
             Flexible(
                 child: Container(
@@ -41,8 +35,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  ProfileUserCard(title: 'Aman', desc: 'desc'),
 
+                  GestureDetector(
+
+                    child: ProfileUserCard(title: 'Aman', desc: 'desc'),
+                    onTap: () {Navigator.pushNamed(context, registration.routeName);},
+                  ),
 
 
 
@@ -60,11 +58,19 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         padding: const EdgeInsets.only(top: 20,bottom: 20),
                         child: Column(
                           children: [
-                            ProfileItem(icons: FontAwesomeIcons.list, title: 'My Items'),
+                            GestureDetector(
+                            onTap: () {Navigator.pushNamed(context, Items.routeName);} ,
+                            child:ProfileItem(icons: FontAwesomeIcons.list, title: 'My Items'),
+                            ),
                             SizedBox(height: 10,),
                             Container(height: 1,width: double.infinity,color: Color.fromRGBO(0, 0, 0, 0.1),),
                             SizedBox(height: 10,),
-                            ProfileItem(icons: FontAwesomeIcons.bookmark, title: 'Wishlist'),
+
+                            GestureDetector(
+                              onTap: () {Navigator.pushNamed(context, YourWish.routeName);} ,
+                              child:ProfileItem(icons: FontAwesomeIcons.bookmark, title: 'Wishlist'),
+                            ),
+
                             SizedBox(height: 10,),
                             Container(height: 1,width: double.infinity,color: Color.fromRGBO(0, 0, 0, 0.1),),
                             SizedBox(height: 10,),

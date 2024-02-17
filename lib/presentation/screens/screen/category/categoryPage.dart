@@ -4,10 +4,12 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:sellingportal/logic/cubits/category/category_cubit.dart';
 import 'package:sellingportal/presentation/screens/screen/sellFormScreens/stepperMainPage.dart';
 import 'package:sellingportal/presentation/widget/bottomBarIcons.dart';
-
+import '../../../../res/drawable/backgroundWave.dart';
+import '../../Auth/loginPage.dart';
 
 class CategorySelectionPage extends StatelessWidget {
   static const String routeName = "CategorySelectionPage";
+
   final List<CategoryOption> categories = [
     CategoryOption(
       title: 'Gadgets',
@@ -26,29 +28,56 @@ class CategorySelectionPage extends StatelessWidget {
       icon: Icons.microwave,
     ),
   ];
-  categoryIcons catIcon = categoryIcons();
+
   @override
   Widget build(BuildContext context) {
+    final height = MediaQuery.of(context).size.height;
     final cubit = BlocProvider.of<CategoryCubit>(context);
+
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Select a Category'),
-      ),
-      body: Padding(
-        padding: const EdgeInsets.all(18.0),
-        child: GridView.count(
-          crossAxisCount: 2,
-          crossAxisSpacing: 8.0,
-          mainAxisSpacing: 8.0,
-          children: List.generate(cubit.state.categories.length, (index) {
-            final category = cubit.state.categories[index];
-            return CategoryCard(
-              title: category.title!,
-              icon: categories[index].icon,
-              catid: category.sId!,
-            );
-          }),
-        ),
+      resizeToAvoidBottomInset: false,
+      body: Column(
+        children: [
+          Stack(
+            children: [
+              Container(
+                height: height * 0.20,
+                child: BackgroundWave(
+                  height: height * 20,
+                  colors: Color.fromRGBO(74, 67, 236, 1),
+                ),
+              ),
+              AppBar(
+                backgroundColor: Color.fromRGBO(74, 67, 236, 1),
+                title: Text(
+                  'Category',
+                  style: TextStyle(
+                    fontSize: 20,
+                    color: Colors.white,
+                  ),
+                ),
+                // Add more app bar properties if needed
+              ),
+            ],
+          ),
+          Padding(
+            padding: const EdgeInsets.all(18.0),
+            child: GridView.count(
+              crossAxisCount: 2,
+              crossAxisSpacing: 8.0,
+              mainAxisSpacing: 8.0,
+              shrinkWrap: true, // Important: this allows the GridView to scroll inside the Column
+              children: List.generate(cubit.state.categories.length, (index) {
+                final category = cubit.state.categories[index];
+                return CategoryCard(
+                  title: category.title!,
+                  icon: categories[index].icon,
+                  catid: category.sId!,
+                );
+              }),
+            ),
+          ),
+        ],
       ),
     );
   }
@@ -59,7 +88,7 @@ class CategoryCard extends StatelessWidget {
   final IconData icon;
   final String catid;
 
-  const CategoryCard({required this.title, required this.icon,required this.catid});
+  const CategoryCard({required this.title, required this.icon, required this.catid});
 
   @override
   Widget build(BuildContext context) {
@@ -71,8 +100,7 @@ class CategoryCard extends StatelessWidget {
       color: Colors.white,
       child: InkWell(
         onTap: () {
-          // Handle category selection here
-          Navigator.pushNamed(context, FormPage.routeName,arguments: catid);
+          Navigator.pushNamed(context, FormPage.routeName, arguments: catid);
         },
         child: Padding(
           padding: const EdgeInsets.all(16.0),

@@ -24,7 +24,6 @@ import 'image_display_container.dart';
 class FormPage extends StatefulWidget {
   static const String routeName = 'FormPage';
   String catId;
-
    FormPage({Key? key,required this.catId}) : super(key: key);
 
   @override
@@ -46,9 +45,13 @@ class _FormPageState extends State<FormPage> {
   TextEditingController photoController = TextEditingController();
   @override
   Widget build(BuildContext context) {
-    
+    final height = MediaQuery.of(context).size.height;
     return Scaffold(
-      appBar: AppBar(),
+      appBar:    AppBar(
+        backgroundColor: Color.fromRGBO(74, 67, 236, 1),
+        title: Text('Form' ,style:commonTextsStyle(fontsize: 20,color: Colors.white),),
+        // Add more app bar properties if needed
+      ),
       body: BlocListener<ProductUploadCubit,ProductUploadState>(
 
         listener: (context,state){
