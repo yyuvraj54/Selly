@@ -4,6 +4,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:sellingportal/logic/cubits/user/user_cubit.dart';
+import 'package:sellingportal/logic/cubits/user/user_state.dart';
 import 'package:sellingportal/presentation/screens/screen/Myitems.dart';
 import 'package:sellingportal/presentation/screens/screen/WishList.dart';
 import 'package:sellingportal/presentation/screens/screen/settingsScreen/registrationPage.dart';
@@ -21,6 +22,7 @@ class ProfileScreen extends StatefulWidget {
 class _ProfileScreenState extends State<ProfileScreen> {
   @override
   Widget build(BuildContext context) {
+
     final height = MediaQuery.of(context).size.height;
     return Scaffold(
         backgroundColor: Color.fromRGBO(249, 249, 249, 1),
@@ -38,8 +40,16 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
                   GestureDetector(
 
-                    child: ProfileUserCard(title: 'Aman', desc: 'desc'),
-                    onTap: () {Navigator.pushNamed(context, registration.routeName);},
+                    child: BlocBuilder<UserCubit,UserState>(
+                      builder: (context,state) {
+                        if(state is UserLoggedInState){
+                          return ProfileUserCard(title:state.userModel.name! , desc: state.userModel.address!);
+                        }
+                        return ProfileUserCard(title:'title' , desc: 'desc');
+
+                      }
+                    ),
+                    onTap: () {},
                   ),
 
 

@@ -23,9 +23,15 @@ class MyWishListRepository {
         throw apiResponse.message.toString();
       }
       log(apiResponse.data.toString());
-      return (apiResponse.data as List<dynamic>)
-          .map((json) => MyWishListModel.fromJson(json))
-          .toList();
+      if(apiResponse.data !=null){
+        return (apiResponse.data as List<dynamic>)
+            .map((json) => MyWishListModel.fromJson(json))
+            .toList();
+      }
+      else{
+        throw apiResponse.message.toString();
+      }
+
     } catch (error) {
       rethrow;
     }

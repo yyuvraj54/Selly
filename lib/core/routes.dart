@@ -7,6 +7,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
 import 'package:sellingportal/data/model/category_model.dart';
 import 'package:sellingportal/data/model/product_model.dart';
+import 'package:sellingportal/data/model/user_model.dart';
 import 'package:sellingportal/logic/cubits/category_product/category_product_cubit.dart';
 import 'package:sellingportal/logic/cubits/products/product_cubit.dart';
 import 'package:sellingportal/logic/cubits/products/product_upload_cubit.dart';
@@ -55,7 +56,7 @@ class Routes {
         return CupertinoPageRoute(builder: (context)=>ChangeNotifierProvider(create:(context)=>(SignupProvider(context)),child: signup()));
 
       case registration.routeName:
-        return CupertinoPageRoute(builder: (context) => registration());
+        return CupertinoPageRoute(builder: (context) => registration(userModel: settings.arguments as UserModel));
 
 
       case MyWishListScreen.routeName:

@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:developer';
 
 import 'package:dio/dio.dart';
+import 'package:sellingportal/logic/cubits/user/userToke.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../core/api.dart';
@@ -57,6 +58,26 @@ class UserRepository {
       //convert this raw response data into user model
       return UserModel.fromJson(apiResponse.data);
     } catch (error) {
+      rethrow;
+    }
+  }
+
+  Future<UserModel> updateUser(UserModel userModel) async {
+    try {
+      Response response = await _api.sendRequest.put(
+          "user/auth/update/${userModel.sId}",
+          data: jsonEncode(userModel.toJson())
+      );
+
+      ApiResponse apiResponse = ApiResponse.fromResponse(response);
+
+      if(!apiResponse.success) {
+        throw apiResponse.message.toString();
+      }
+
+      return UserModel.fromJson(apiResponse.data);
+    }
+    catch(ex) {
       rethrow;
     }
   }

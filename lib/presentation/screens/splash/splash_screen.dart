@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sellingportal/presentation/screens/Auth/loginPage.dart';
 import 'package:sellingportal/presentation/screens/screen/home/homescreen.dart';
+import 'package:sellingportal/presentation/screens/screen/settingsScreen/registrationPage.dart';
 
 import '../../../logic/cubits/user/user_cubit.dart';
 import '../../../logic/cubits/user/user_state.dart';
@@ -18,8 +19,14 @@ class _SplashScreenState extends State<SplashScreen> {
   void _goToNextScreen(){
     UserState userState = BlocProvider.of<UserCubit>(context).state;
     if(userState is UserLoggedInState){
-      Navigator.popUntil(context, (route) => route.isFirst);
-      Navigator.pushReplacementNamed(context, homeScreen.routeName);
+      if(userState.userModel.telegram_username==""||userState.userModel.college==""||userState.userModel.address==""){
+        Navigator.pushReplacementNamed(context,registration.routeName,arguments: userState.userModel);
+      }
+      else{
+        Navigator.popUntil(context, (route) => route.isFirst);
+        Navigator.pushReplacementNamed(context, homeScreen.routeName);
+      }
+
     }
     else if(userState is UserErrorState){
       Navigator.popUntil(context, (route) => route.isFirst);
