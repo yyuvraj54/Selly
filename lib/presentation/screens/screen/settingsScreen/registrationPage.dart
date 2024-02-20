@@ -3,99 +3,125 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:sellingportal/presentation/widget/MyElevatedButton.dart';
 
+import '../../../../res/drawable/backgroundWave.dart';
+
 
 GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 bool _isSaveEnabled = false;
 
 class registration extends StatelessWidget {
   const registration({super.key});
+  static const String routeName = 'registration';
 
   @override
   Widget build(BuildContext context) {
     double screenHeight = MediaQuery.of(context).size.height;
+    final height = MediaQuery.of(context).size.height;
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      body: Padding(
-        padding: const EdgeInsets.all(15.0),
-        child: Form(
-          key: _formKey,
-          child: Column(
-            children: [
-              Container(
-                margin: EdgeInsets.only(top:50),
-                alignment: Alignment.center,
-                child: CircleAvatar(radius: 60.0, backgroundImage: AssetImage('assets/images/profile.png'),
+      body:Column(
+        children: [
+      Stack(
+      children: [
+      Container(
+      height: height * 0.20,
+        child: BackgroundWave(
+          height: height * 20,
+          colors: Color.fromRGBO(74, 67, 236, 1),
+        ),
+      ),
+      AppBar(
+        backgroundColor: Color.fromRGBO(74, 67, 236, 1),
+        title: Text('Profile' ,style:commonTextsStyle(fontsize: 20,color: Colors.white),),
+        // Add more app bar properties if needed
+      ),
+      ],
+    ),
+    Expanded(
+    child: SingleChildScrollView(
+    child:Padding(
+      padding: const EdgeInsets.all(18.0),
+      child: Form(key: _formKey, child: Column(
+          children:[
+                Container(
+                  margin: EdgeInsets.only(top:10),
+                  alignment: Alignment.center,
+                  child: CircleAvatar(radius: 60.0, backgroundImage: AssetImage('assets/images/profile.png'),
+                  ),
                 ),
-              ),
 
-              Container(
-                margin: EdgeInsets.only(top:30),
-                child: Text(' Registration ',style: TextStyle(fontSize: screenHeight * 0.03, fontWeight: FontWeight.bold,fontFamily: "Poppins"),
+                Container(
+                  margin: EdgeInsets.only(top:30),
+                  child: Text(' Registration ',style: TextStyle(fontSize: screenHeight * 0.03, fontWeight: FontWeight.bold,fontFamily: "Poppins"),
+                  ),
                 ),
-              ),
 
-              Container(
-                margin: EdgeInsets.only(top: screenHeight * 0.02),
-                child: TextFormField(
-                  // controller: ,
-                  decoration: commonInputDecoration(labelText: "Admission number"),
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return 'Please enter your username';
-                    }
-                    return null;
-                  },
-                ),
-              ),
-
-              Container(
-                margin: EdgeInsets.only(top: screenHeight * 0.02),
-                child: TextFormField(
-                  // controller: ,
-                  decoration: commonInputDecoration(labelText: "Address"),
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return 'Please enter your username';
-                    }
-                    return null;
-                  },
-                ),
-              ),
-
-
-              Container(
-                margin: EdgeInsets.only(top: screenHeight * 0.02),
-                child: DropdownButtonFormField<String>(
-                  decoration: commonInputDecoration(labelText: "College Name"),
-                  items: [DropdownMenuItem<String>(value: "option1", child: Text("JSS College"),),
-                    DropdownMenuItem<String>(value: "option2", child: Text("JIIT Sector-62"),),],
-                  validator: (value) {if (value == null || value.isEmpty) {return 'Please select an option';}return null;},
-                  onChanged: (value) {},),
-              ),
-
-              Padding(
-                padding: const EdgeInsets.fromLTRB(20,15.0,20,0),
-                child: Container(
+                Container(
                   margin: EdgeInsets.only(top: screenHeight * 0.02),
-                  width: double.infinity,
-                  child: MyElevatedButton(child:Text('SAVE',style: commonTextsStyle(color: Colors.white)),
-                    onPressed: () {
-                      if (_formKey.currentState!.validate()) {
-                        // Form is validated, enable save functionality here
-                        // For now, just print a message
-                        print('Form is valid, enable save functionality here');
-                      } else {
-                        // Form is not valid, show an error message or handle accordingly
-                        print('Form is invalid');
+                  child: TextFormField(
+                    // controller: ,
+                    decoration: commonInputDecoration(labelText: "Admission number"),
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Please enter your username';
                       }
+                      return null;
                     },
                   ),
                 ),
+
+                Container(
+                  margin: EdgeInsets.only(top: screenHeight * 0.02),
+                  child: TextFormField(
+                    // controller: ,
+                    decoration: commonInputDecoration(labelText: "Address"),
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Please enter your username';
+                      }
+                      return null;
+                    },
+                  ),
+                ),
+
+
+                Container(
+                  margin: EdgeInsets.only(top: screenHeight * 0.02),
+                  child: DropdownButtonFormField<String>(
+                    decoration: commonInputDecoration(labelText: "College Name"),
+                    items: [DropdownMenuItem<String>(value: "option1", child: Text("JSS College"),),
+                      DropdownMenuItem<String>(value: "option2", child: Text("JIIT Sector-62"),),],
+                    validator: (value) {if (value == null || value.isEmpty) {return 'Please select an option';}return null;},
+                    onChanged: (value) {},),
+                ),
+
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(20,15.0,20,0),
+                  child: Container(
+                    margin: EdgeInsets.only(top: screenHeight * 0.02),
+                    width: double.infinity,
+                    child: MyElevatedButton(child:Text('SAVE',style: commonTextsStyle(color: Colors.white)),
+                      onPressed: () {
+                        if (_formKey.currentState!.validate()) {
+                          // Form is validated, enable save functionality here
+                          // For now, just print a message
+                          print('Form is valid, enable save functionality here');
+                        } else {
+                          // Form is not valid, show an error message or handle accordingly
+                          print('Form is invalid');
+                        }
+                      },
+                    ),
+                  ),
+                ),
+
+                ],
               ),
-            ],
-          ),
+            ),
+    ),
         ),
       ),
+      ]),
     );
   }
 }

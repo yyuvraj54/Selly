@@ -15,6 +15,8 @@ import 'package:sellingportal/presentation/screens/Auth/loginPage.dart';
 import 'package:sellingportal/presentation/screens/Auth/provider/login_provider.dart';
 import 'package:sellingportal/presentation/screens/Auth/provider/signup_provider.dart';
 import 'package:sellingportal/presentation/screens/Auth/signupPage.dart';
+import 'package:sellingportal/presentation/screens/screen/Myitems.dart';
+import 'package:sellingportal/presentation/screens/screen/WishList.dart';
 import 'package:sellingportal/presentation/screens/screen/category/categoryPage.dart';
 import 'package:sellingportal/presentation/screens/screen/category/category_screen.dart';
 import 'package:sellingportal/presentation/screens/screen/home/explorePage.dart';
@@ -24,6 +26,7 @@ import 'package:sellingportal/presentation/screens/screen/productPage.dart';
 import 'package:sellingportal/presentation/screens/screen/profile/profile_screen.dart';
 import 'package:sellingportal/presentation/screens/screen/sellFormScreens/stepperMainPage.dart';
 import 'package:sellingportal/presentation/screens/screen/sellPage.dart';
+import 'package:sellingportal/presentation/screens/screen/settingsScreen/registrationPage.dart';
 
 import '../presentation/screens/splash/splash_screen.dart';
 
@@ -50,6 +53,16 @@ class Routes {
         return CupertinoPageRoute(builder: (context)=>ProfileScreen());
       case signup.routeName:
         return CupertinoPageRoute(builder: (context)=>ChangeNotifierProvider(create:(context)=>(SignupProvider(context)),child: signup()));
+
+      case registration.routeName:
+        return CupertinoPageRoute(builder: (context) => registration());
+
+
+      case YourWish.routeName:
+        return CupertinoPageRoute(builder: (context) => YourWish());
+
+      case Items.routeName:
+        return CupertinoPageRoute(builder: (context) => Items());
 
       case CategorySelectionPage.routeName:
         return CupertinoPageRoute(builder: (context)=>CategorySelectionPage());

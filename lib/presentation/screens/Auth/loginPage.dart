@@ -91,10 +91,8 @@ class LoginPage extends StatelessWidget {
                   child: MyElevatedButton(
 
                       child: Text('LOG IN',style: commonTextsStyle(color: Colors.white)),
-
                       onPressed: () {
                         provider.login();
-
                       }),
                 ),
 

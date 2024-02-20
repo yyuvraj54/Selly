@@ -22,6 +22,8 @@ class LoginProvider with ChangeNotifier{
   StreamSubscription? _userSubscription;
   //this will help in validating the form
   final formKey = GlobalKey<FormState>();
+
+
   void  login () async{
     //toh pehle hm validate krre hong textfields using the FORM widgets
     //usme ek key lagaya h jisse hm uski state ko access kar payenge

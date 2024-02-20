@@ -17,7 +17,7 @@ class UserRepository {
     required int phoneNumber,
   }) async {
     try {
-      Response response = await _api.sendRequest.post('/user/auth/signup',
+      Response response = await _api.sendRequest.post('user/auth/signup',
           data: jsonEncode({
             "name": name,
             "email": email,
