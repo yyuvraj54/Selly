@@ -70,6 +70,7 @@ class CategorySelectionPage extends StatelessWidget {
               children: List.generate(cubit.state.categories.length, (index) {
                 final category = cubit.state.categories[index];
                 return CategoryCard(
+                  
                   title: category.title!,
                   icon: categories[index].icon,
                   catid: category.sId!,
@@ -97,7 +98,7 @@ class CategoryCard extends StatelessWidget {
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(8.0),
       ),
-      color: Colors.white,
+      color: Color.fromRGBO(255, 255, 255, 1),
       child: InkWell(
         onTap: () {
           Navigator.pushNamed(context, FormPage.routeName, arguments: catid);

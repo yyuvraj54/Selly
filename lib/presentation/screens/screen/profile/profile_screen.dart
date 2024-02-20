@@ -29,7 +29,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
         body: Column(
           children: [
             Stack(children: [Container(height: height * .20, child: BackgroundWave(height: height * 20, colors: Color.fromRGBO(74, 67, 236, 1)),),
-              AppBar(backgroundColor: Color.fromRGBO(74, 67, 236, 1),)
+              AppBar(backgroundColor: Color.fromRGBO(74, 67, 236, 1),title: Text('Profile',style: GoogleFonts.poppins(color: Colors.white),),)
             ]),
             Flexible(
                 child: Container(

@@ -16,7 +16,10 @@ import 'package:sellingportal/logic/cubits/user/user_cubit.dart';
 import 'package:sellingportal/logic/services/preferences.dart';
 import 'package:sellingportal/presentation/screens/Auth/loginPage.dart';
 import 'package:sellingportal/presentation/screens/Auth/signupPage.dart';
+import 'package:sellingportal/presentation/screens/screen/home/explorePage.dart';
+import 'package:sellingportal/presentation/screens/screen/home/homescreen.dart';
 import 'package:sellingportal/presentation/screens/screen/profile/profile_screen.dart';
+import 'package:sellingportal/presentation/screens/screen/search_screen.dart';
 import 'package:sellingportal/presentation/screens/screen/settingsScreen/registrationPage.dart';
 import 'package:sellingportal/presentation/screens/splash/splash_screen.dart';
 

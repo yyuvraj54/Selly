@@ -45,9 +45,17 @@ class _FormPageState extends State<FormPage> {
   TextEditingController photoController = TextEditingController();
   @override
   Widget build(BuildContext context) {
+
+    //useercubut
+    UserCubit userCubit= BlocProvider.of<UserCubit>(context);
+    late UserLoggedInState ?userState;
+    if(userCubit.state is UserLoggedInState){
+      userState = userCubit.state as UserLoggedInState;
+
+    }
     final height = MediaQuery.of(context).size.height;
     return Scaffold(
-      appBar:    AppBar(
+      appBar: AppBar(
         backgroundColor: Color.fromRGBO(74, 67, 236, 1),
         title: Text('Form' ,style:commonTextsStyle(fontsize: 20,color: Colors.white),),
         // Add more app bar properties if needed
@@ -92,6 +100,7 @@ class _FormPageState extends State<FormPage> {
               return Container(
                 padding: const EdgeInsets.all(20),
                 child: Stepper(
+
                   type: StepperType.horizontal,
                   currentStep: currentStep,
                   onStepCancel: () => currentStep == 0
@@ -105,6 +114,7 @@ class _FormPageState extends State<FormPage> {
                       // Do something with this information
                       // productModel.listedBy = state.userModel.sId;
                       productModel.category = widget.catId;
+                      productModel.link = userState!.userModel.telegram_username;
                       BlocProvider.of<ProductUploadCubit>(context).addToProductListings(productModel,UserToken.token.toString());
                       // Navigator.pushReplacementNamed(context,explorePage.routeName );
                       // Navigator.pushReplacementNamed(context, homeScreen.routeName);

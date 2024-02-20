@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:sellingportal/presentation/screens/screen/WishList.dart';
 import 'package:sellingportal/presentation/screens/screen/category/categoryPage.dart';
 
 import 'package:sellingportal/presentation/screens/screen/home/chatPage.dart';
@@ -52,7 +53,7 @@ class _homeScreenState extends State<homeScreen> {
     //Pages list
     final List<Widget> bottomBarPages = [
       const explorePage(),
-      const myAdsPage(),
+      MyWishListScreen(),
       const chatPage(),
       const myAdsPage(),
       const myAccountsPage(),
@@ -139,8 +140,8 @@ class _homeScreenState extends State<homeScreen> {
                 icon: bottomBarIconsActive.bottomBarIconsList[0],
                 label: 'explore'),
             NavigationDestination(
-                icon: bottomBarIconsActive.bottomBarIconsList[1],
-                label: 'explore'),
+                icon:Icon(FontAwesomeIcons.bookmark,color: Color.fromRGBO(58, 120, 255, 1),)
+                ,label: 'My WishList'),
           ]),
     );
   }

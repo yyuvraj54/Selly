@@ -32,9 +32,27 @@ class UserRepository {
       }
       //convert this raw response data into user model
       return UserModel.fromJson(apiResponse.data);
-    } catch (error) {
-      log(error.toString());
-      rethrow;
+    } on DioException catch(ex) {
+      switch(ex.type){
+        case DioExceptionType.connectionTimeout:
+          throw 'Server not responding';
+        case DioExceptionType.connectionError:
+          throw 'Server not responding';
+        case DioExceptionType.sendTimeout:
+          throw 'Check network connection';
+        case DioExceptionType.receiveTimeout:
+          throw 'Check network connection';
+        case DioExceptionType.badCertificate:
+          throw 'badCertificate';
+        case DioExceptionType.badResponse:
+          throw 'Bad Response';
+        case DioExceptionType.cancel:
+          throw 'cancel';
+        case DioExceptionType.unknown:
+          throw 'Some Error occured';
+
+
+      }
     }
   }
 
@@ -57,8 +75,27 @@ class UserRepository {
       }
       //convert this raw response data into user model
       return UserModel.fromJson(apiResponse.data);
-    } catch (error) {
-      rethrow;
+    } on DioException catch(ex) {
+      switch(ex.type){
+        case DioExceptionType.connectionTimeout:
+          throw 'Server not responding';
+        case DioExceptionType.connectionError:
+          throw 'Server not responding';
+        case DioExceptionType.sendTimeout:
+          throw 'Check network connection';
+        case DioExceptionType.receiveTimeout:
+          throw 'Check network connection';
+        case DioExceptionType.badCertificate:
+          throw 'badCertificate';
+        case DioExceptionType.badResponse:
+          throw 'Bad Response';
+        case DioExceptionType.cancel:
+          throw 'cancel';
+        case DioExceptionType.unknown:
+          throw 'Some Error occured';
+
+
+      }
     }
   }
 
@@ -76,9 +113,27 @@ class UserRepository {
       }
 
       return UserModel.fromJson(apiResponse.data);
-    }
-    catch(ex) {
-      rethrow;
+    }on DioException catch(ex) {
+      switch(ex.type){
+        case DioExceptionType.connectionTimeout:
+           throw 'connectionTimeout';
+        case DioExceptionType.connectionError:
+           throw 'connectionError';
+        case DioExceptionType.sendTimeout:
+           throw ' sendTimeout';
+        case DioExceptionType.receiveTimeout:
+           throw 'receiveTimeout';
+        case DioExceptionType.badCertificate:
+           throw 'badCertificate';
+          case DioExceptionType.badResponse:
+         throw 'badResponse';
+        case DioExceptionType.cancel:
+           throw 'cancel';
+        case DioExceptionType.unknown:
+           throw 'unknown';
+
+
+      }
     }
   }
 }

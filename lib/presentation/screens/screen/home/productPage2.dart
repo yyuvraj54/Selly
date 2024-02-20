@@ -5,9 +5,12 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:sellingportal/data/model/product_model.dart';
 import 'package:sellingportal/logic/cubits/my%20wish%20lis/myWishList_state.dart';
 import 'package:sellingportal/logic/cubits/my%20wish%20lis/mywishlist_cubit.dart';
+import 'package:sellingportal/logic/cubits/user/user_cubit.dart';
+import 'package:sellingportal/logic/cubits/user/user_state.dart';
 import 'package:sellingportal/logic/services/format.dart';
 import 'package:sellingportal/res/colors/colors.dart';
 import 'package:sellingportal/res/drawable/backgroundWave.dart';
+import 'package:telegram/telegram.dart';
 
 class productScreen extends StatelessWidget {
   ProductModel productModel;
@@ -19,6 +22,13 @@ class productScreen extends StatelessWidget {
   static const String routeName = 'productScreen';
 
   Widget build(BuildContext context) {
+    UserCubit userCubit= BlocProvider.of<UserCubit>(context);
+    late UserLoggedInState ?userState;
+    if(userCubit.state is UserLoggedInState){
+     userState = userCubit.state as UserLoggedInState;
+
+    }
+
     var height = MediaQuery.of(context).size.height;
     var width = MediaQuery.of(context).size.width;
     return Scaffold(
@@ -76,7 +86,7 @@ class productScreen extends StatelessWidget {
                               slideBuilder: (index) {
                                 return Container(
                                   child: Image.network(
-                                    productModel.photos![0],
+                                    productModel.photos![index],
                                     frameBuilder: (BuildContext context,
                                         Widget child,
                                         int? frame,
@@ -324,7 +334,12 @@ class productScreen extends StatelessWidget {
                         borderRadius: BorderRadius.circular(10)),
                     elevation: 0,
                     backgroundColor: Color.fromRGBO(86, 105, 255, 1)),
-                onPressed: () => {},
+                onPressed: () => {
+
+                  //to open telegram
+                  //link-->user telegram username
+                  Telegram.send(username: productModel.link!),
+                },
                 child: Text(
                   'Chat',
                   style: TextStyle(color: Colors.white),

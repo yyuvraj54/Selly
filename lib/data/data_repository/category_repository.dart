@@ -32,8 +32,27 @@ class CategoryRepository {
       log('categ-repo-after list conversion');
       return categoryList;
 
-    } catch (error) {
-      rethrow;
+    } on DioException catch(ex) {
+      switch(ex.type){
+        case DioExceptionType.connectionTimeout:
+          throw 'Server not responding';
+        case DioExceptionType.connectionError:
+          throw 'Server not responding';
+        case DioExceptionType.sendTimeout:
+          throw 'Check network connection';
+        case DioExceptionType.receiveTimeout:
+          throw 'Check network connection';
+        case DioExceptionType.badCertificate:
+          throw 'badCertificate';
+        case DioExceptionType.badResponse:
+          throw 'Bad Response';
+        case DioExceptionType.cancel:
+          throw 'cancel';
+        case DioExceptionType.unknown:
+          throw 'Some Error occured';
+
+
+      }
     }
   }
 

@@ -32,8 +32,27 @@ class MyWishListRepository {
         throw apiResponse.message.toString();
       }
 
-    } catch (error) {
-      rethrow;
+    }on DioException catch(ex) {
+      switch(ex.type){
+        case DioExceptionType.connectionTimeout:
+          throw 'Server not responding';
+        case DioExceptionType.connectionError:
+          throw 'Server not responding';
+        case DioExceptionType.sendTimeout:
+          throw 'Check network connection';
+        case DioExceptionType.receiveTimeout:
+          throw 'Check network connection';
+        case DioExceptionType.badCertificate:
+          throw 'badCertificate';
+        case DioExceptionType.badResponse:
+          throw 'Bad Response';
+        case DioExceptionType.cancel:
+          throw 'cancel';
+        case DioExceptionType.unknown:
+          throw 'Some Error occured';
+
+
+      }
     }
   }
 
@@ -56,8 +75,27 @@ class MyWishListRepository {
 
       return (apiResponse.data as List<dynamic>).map((json) => MyWishListModel.fromJson(json)).toList();
     }
-    catch(ex) {
-      rethrow;
+    on DioException catch(ex) {
+      switch(ex.type){
+        case DioExceptionType.connectionTimeout:
+          throw 'Server not responding';
+        case DioExceptionType.connectionError:
+          throw 'Server not responding';
+        case DioExceptionType.sendTimeout:
+          throw 'Check network connection';
+        case DioExceptionType.receiveTimeout:
+          throw 'Check network connection';
+        case DioExceptionType.badCertificate:
+          throw 'badCertificate';
+        case DioExceptionType.badResponse:
+          throw 'Bad Response';
+        case DioExceptionType.cancel:
+          throw 'cancel';
+        case DioExceptionType.unknown:
+          throw 'Some Error occured';
+
+
+      }
     }
   }
 

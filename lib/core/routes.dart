@@ -25,6 +25,7 @@ import 'package:sellingportal/presentation/screens/screen/home/homescreen.dart';
 import 'package:sellingportal/presentation/screens/screen/home/productPage2.dart';
 import 'package:sellingportal/presentation/screens/screen/productPage.dart';
 import 'package:sellingportal/presentation/screens/screen/profile/profile_screen.dart';
+import 'package:sellingportal/presentation/screens/screen/search_screen.dart';
 import 'package:sellingportal/presentation/screens/screen/sellFormScreens/stepperMainPage.dart';
 import 'package:sellingportal/presentation/screens/screen/sellPage.dart';
 import 'package:sellingportal/presentation/screens/screen/settingsScreen/registrationPage.dart';
@@ -64,6 +65,8 @@ class Routes {
 
       case Items.routeName:
         return CupertinoPageRoute(builder: (context) => Items());
+      case SearchScreen.routeName:
+        return CupertinoPageRoute(builder: (context) => SearchScreen(productList: settings.arguments as List<ProductModel>,));
 
       case CategorySelectionPage.routeName:
         return CupertinoPageRoute(builder: (context)=>CategorySelectionPage());

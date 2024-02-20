@@ -39,5 +39,15 @@ class ProductCubit extends Cubit<ProductState> {
     }
   }
 
-
+ void Search(String BEARER_TOKEN,String query) async {
+   emit(ProductLoadingState(state.products));
+   try {
+     List<ProductModel> products =
+     await _productRepository.Search(query, BEARER_TOKEN);
+     products.sort((a, b) => b.createdAt!.compareTo(a.createdAt!));
+     emit(ProductLoadedState(products));
+   } catch (error) {
+     emit(ProductErrorState(error.toString(), state.products));
+   }
+ }
 }
