@@ -58,8 +58,8 @@ class Routes {
         return CupertinoPageRoute(builder: (context) => registration());
 
 
-      case YourWish.routeName:
-        return CupertinoPageRoute(builder: (context) => YourWish());
+      case MyWishListScreen.routeName:
+        return CupertinoPageRoute(builder: (context) => MyWishListScreen());
 
       case Items.routeName:
         return CupertinoPageRoute(builder: (context) => Items());

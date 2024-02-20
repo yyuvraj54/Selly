@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:sellingportal/logic/cubits/myItems/myItems_cubit.dart';
 import 'package:sellingportal/logic/cubits/myItems/myitems_state.dart';
 import 'package:sellingportal/presentation/screens/Auth/loginPage.dart';
@@ -40,7 +41,7 @@ class Items extends StatelessWidget {
                   left: 0,
                   right: 0,
                   child: AppBar(
-                    title: Text('My Items'),
+                    title: Text('My Items',style: GoogleFonts.poppins(color: Colors.white),),
                     backgroundColor: Color.fromRGBO(74, 67, 236, 1),
                   ),
                 ),
@@ -48,7 +49,6 @@ class Items extends StatelessWidget {
             ),
             //items
             Container(
-
               child: BlocBuilder<MyItemsCubit, MyItemsState>(
                 builder: (context, state) {
                   if (state is MyItemsLoadingState && state.products.isEmpty) {

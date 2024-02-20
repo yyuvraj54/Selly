@@ -67,7 +67,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             SizedBox(height: 10,),
 
                             GestureDetector(
-                              onTap: () {Navigator.pushNamed(context, YourWish.routeName);} ,
+                              onTap: () {Navigator.pushNamed(context, MyWishListScreen.routeName);} ,
                               child:ProfileItem(icons: FontAwesomeIcons.bookmark, title: 'Wishlist'),
                             ),
 

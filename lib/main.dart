@@ -9,6 +9,7 @@ import 'package:sellingportal/data/data_repository/category_repository.dart';
 import 'package:sellingportal/data/data_repository/user_repository.dart';
 import 'package:sellingportal/data/model/user_model.dart';
 import 'package:sellingportal/logic/cubits/category/category_cubit.dart';
+import 'package:sellingportal/logic/cubits/my%20wish%20lis/mywishlist_cubit.dart';
 import 'package:sellingportal/logic/cubits/myItems/myItems_cubit.dart';
 import 'package:sellingportal/logic/cubits/products/product_cubit.dart';
 import 'package:sellingportal/logic/cubits/user/user_cubit.dart';
@@ -42,6 +43,7 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (context)=>CategoryCubit(userCubit: BlocProvider.of<UserCubit>(context))),
         BlocProvider(create: (context)=>ProductCubit(userCubit: BlocProvider.of<UserCubit>(context))),
         BlocProvider(create: (context)=>MyItemsCubit(userCubit: BlocProvider.of<UserCubit>(context))),
+        BlocProvider(create: (context)=>MyWishListCubit(BlocProvider.of<UserCubit>(context))),
       ],
       child: MaterialApp(
         onGenerateRoute: Routes.onGenerateRoute,

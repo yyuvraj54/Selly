@@ -1,15 +1,15 @@
 import 'package:sellingportal/data/model/product_model.dart';
 
-class CartItemModel {
+class MyWishListModel {
   //custom.
   ProductModel? product;
   //
 
   String? sId;
 
-  CartItemModel({ this.sId,this.product});
+  MyWishListModel({ this.sId,this.product});
 
-  CartItemModel.fromJson(Map<String, dynamic> json) {
+  MyWishListModel.fromJson(Map<String, dynamic> json) {
     //
     product = ProductModel.fromJson(json['product']);
     sId = json['_id'];

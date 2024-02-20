@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_carousel_slider/carousel_slider.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:sellingportal/data/model/product_model.dart';
+import 'package:sellingportal/logic/cubits/my%20wish%20lis/myWishList_state.dart';
+import 'package:sellingportal/logic/cubits/my%20wish%20lis/mywishlist_cubit.dart';
 import 'package:sellingportal/logic/services/format.dart';
 import 'package:sellingportal/res/colors/colors.dart';
 import 'package:sellingportal/res/drawable/backgroundWave.dart';
@@ -139,9 +142,25 @@ class productScreen extends StatelessWidget {
                             )
                           ],
                         ),
-                        IconButton(
-                            onPressed: () {},
-                            icon: Icon(FontAwesomeIcons.bookmark)),
+                        BlocBuilder<MyWishListCubit,MyWishListState>(
+                          builder: (context,state) {
+                            return IconButton(
+                                onPressed: () {
+
+                                  if( (BlocProvider.of<MyWishListCubit>(context).cartContains(productModel)))
+                                  {
+                                    BlocProvider.of<MyWishListCubit>(context)
+                                        .removeFromCart(productModel);
+                                  }
+                                 else {
+                                  BlocProvider.of<MyWishListCubit>(context)
+                                      .addToCart(productModel);
+                                }
+                              },
+                                icon: (BlocProvider.of<MyWishListCubit>(context).cartContains(productModel))?Icon(FontAwesomeIcons.solidBookmark):Icon(FontAwesomeIcons.bookmark));
+                          }
+                        ),
+
                       ],
                     ),
                   ],
