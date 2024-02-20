@@ -56,6 +56,7 @@ class UserCubit extends Cubit<UserState> {
           email: email, password: password, userModel: userModel);
       SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
       sharedPreferences.setString('name', userModel.name!);
+      UserToken.id = userModel.sId;
     } catch (error) {
       emit(UserErrorState(error.toString()));
     }

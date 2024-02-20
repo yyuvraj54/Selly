@@ -19,8 +19,11 @@ class CategoryProductCubit extends Cubit<CategoryProductState> {
     emit( CategoryProductLoadingState(state.products) );
     try {
       log(UserToken.token!);
+      log('categ-repo-after token');
       final products = await _productRepository.FetchProductByCategory(category.sId!, UserToken.token!);
+      log('categ-repo-after feetch');
       products.sort((a, b) => b.createdAt!.compareTo(a.createdAt!));
+      log('categ-repo-after sort');
       emit( CategoryProductLoadedState(products));
     }
     catch(ex) {

@@ -47,7 +47,7 @@ final cubit = BlocProvider.of<CategoryProductCubit>(context);
                 }
                 return GridView.builder(
                   padding: EdgeInsets.only(bottom: 110),
-                  physics: NeverScrollableScrollPhysics(),
+                  // physics: NeverScrollableScrollPhysics(),
                   itemCount: state.products.length,
                   shrinkWrap: true,
                   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(

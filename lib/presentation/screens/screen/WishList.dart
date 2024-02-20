@@ -33,13 +33,17 @@ class YourWish extends StatelessWidget {
               backgroundColor: Color.fromRGBO(74, 67, 236, 1),
               title: Text(
                 'Wishlist',
-                style: commonTextsStyle(fontsize: 20 ,color: Colors.white), // You can use your commonTextsStyle here
+                style: commonTextsStyle(
+                    fontsize: 20,
+                    color:
+                        Colors.white), // You can use your commonTextsStyle here
               ),
               // Add more app bar properties if needed
             ),
           ),
           Positioned.fill(
-            top: kToolbarHeight + 10, // Adjust this value to position the text below the app bar
+            top: kToolbarHeight + 10,
+            // Adjust this value to position the text below the app bar
             child: Center(
               child: Text(
                 'Your wishlist is empty',
