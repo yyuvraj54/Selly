@@ -36,6 +36,7 @@ class _FormPageState extends State<FormPage> {
   int currentStep = 0;
   List<String> _imagePaths = [];
   String _selectedCondition = 'New';
+  bool _isUploading = false;
 
   void _updateImagePaths(List<String> paths) {
     setState(() {
@@ -114,19 +115,33 @@ class _FormPageState extends State<FormPage> {
                     bool isLastStep = (currentStep == getSteps().length - 1);
                     if (isLastStep) {
 
+                      setState(() {
+                        _isUploading = true;
+                      });
+
                       try{
                         if (_imagePaths!=null) {
                           UserState userState = BlocProvider.of<UserCubit>(context).state;
                           if(userState is UserLoggedInState){
                             var userId = userState.userModel.sId;
+
+                            showDialog(context: context, barrierDismissible: false, builder: (BuildContext context) {return AlertDialog(content: Row(children: [CircularProgressIndicator(), SizedBox(width: 20), Text("Uploading Images..."),],),);},);
+
                             List<String> imageUrls = await uploadAndReturnImageUrls(userId!, _imagePaths);
-                            productModel.photos =imageUrls;
+
+                            productModel.photos = imageUrls.isNotEmpty ? imageUrls : ["https://firebasestorage.googleapis.com/v0/b/selly-b1801.appspot.com/o/logo.png?alt=media&token=b7e5e875-eab8-4367-a0bc-1ef12c5a8495"];
                           }
                         }
+
                       }
                       catch(e){
                         print('An error occurred: $e');
                       }
+
+                      setState(() {
+                        _isUploading = false;
+                      });
+
 
                       // Do something with this information
                       // productModel.listedBy = state.userModel.sId;
@@ -314,5 +329,3 @@ Future<List<String>> uploadAndReturnImageUrls(String username, List<String> imag
 
   }
 }
-
-
