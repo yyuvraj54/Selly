@@ -19,9 +19,11 @@ class FirebaseRepository {
             .child('$username/${DateTime.now().millisecondsSinceEpoch}${imageFile.path.split('/').last}');
 
         // Upload the file to Firebase Storage
-        final UploadTask uploadTask = storageReference.putFile(imageFile,SettableMetadata(contentType: 'image/jpeg'));
+        final UploadTask uploadTask =  storageReference.putFile(imageFile,SettableMetadata(contentType: 'image/jpeg'));
 
         print("uploadDone");
+
+
 
         // Get the URL of the uploaded image
         final TaskSnapshot downloadUrl = await uploadTask.whenComplete(() {});

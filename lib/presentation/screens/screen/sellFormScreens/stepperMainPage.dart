@@ -113,6 +113,21 @@ class _FormPageState extends State<FormPage> {
                   onStepContinue: () async {
                     bool isLastStep = (currentStep == getSteps().length - 1);
                     if (isLastStep) {
+
+                      try{
+                        if (_imagePaths!=null) {
+                          UserState userState = BlocProvider.of<UserCubit>(context).state;
+                          if(userState is UserLoggedInState){
+                            var userId = userState.userModel.sId;
+                            List<String> imageUrls = await uploadAndReturnImageUrls(userId!, _imagePaths);
+                            productModel.photos =imageUrls;
+                          }
+                        }
+                      }
+                      catch(e){
+                        print('An error occurred: $e');
+                      }
+
                       // Do something with this information
                       // productModel.listedBy = state.userModel.sId;
                       productModel.category = widget.catId;
@@ -237,27 +252,20 @@ class _FormPageState extends State<FormPage> {
             // ),
             Container(
               width: 100,
-              child: ElevatedButton(onPressed: () async {
-                if (productModel.photos != null && _imagePaths!=null) {
-
-                  UserState userState = BlocProvider.of<UserCubit>(context).state;
-
-                  if(userState is UserLoggedInState){
-                     var userId = userState.userModel.sId;
-                     List<String> imageUrls = await uploadAndReturnImageUrls(userId!, _imagePaths);
-                     productModel.photos = imageUrls;
-
-
-                  }
-                  // for (String imagePat in _imagePaths) {
-                  //   productModel.photos!.add(imagePat);
-                  // }
-
-                } else {
-                  // Handle the case when photos is null, maybe initialize it or throw an error.
-                  productModel.photos = [photoController.text.toString()];
-                }
-              }, child: Text('Confirm')),
+              // child: ElevatedButton(onPressed: () async {
+              //
+              //
+              //
+              //     if(true){
+              //     // for (String imagePat in _imagePaths) {
+              //     //   productModel.photos!.add(imagePat);
+              //     // }
+              //
+              //   } else {
+              //     // Handle the case when photos is null, maybe initialize it or throw an error.
+              //     productModel.photos = [photoController.text.toString()];
+              //   }
+              // }, child: Text('Confirm')),
             )
           ],
         ),
