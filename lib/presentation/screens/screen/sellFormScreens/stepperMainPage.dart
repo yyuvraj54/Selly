@@ -14,6 +14,7 @@ import 'package:sellingportal/logic/cubits/user/user_state.dart';
 import 'package:sellingportal/logic/services/preferences.dart';
 import 'package:sellingportal/presentation/screens/screen/home/explorePage.dart';
 import 'package:sellingportal/presentation/screens/screen/home/homescreen.dart';
+import 'package:sellingportal/presentation/screens/screen/sellFormScreens/firebase/firebase_repository.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../../../../logic/cubits/user/userToke.dart';
 import 'CustomInput.dart';
@@ -23,6 +24,7 @@ import 'image_display_container.dart';
 
 class FormPage extends StatefulWidget {
   static const String routeName = 'FormPage';
+
   String catId;
    FormPage({Key? key,required this.catId}) : super(key: key);
 
@@ -220,23 +222,42 @@ class _FormPageState extends State<FormPage> {
         // ),
         content: Column(
           children: [
-            CustomInput(
-              hint: "image link",
-              inputBorder: OutlineInputBorder(),
-              controller: photoController,
-              onChanged: (j){},
 
-            ),
+            ImagePickerButton(onImagesPicked: _updateImagePaths),
+            SizedBox(height: 20),
+            _imagePaths.isNotEmpty ? ImageDisplayContainer(imagePaths: _imagePaths, onDeleteImage: (int index) {
+              setState(() {_imagePaths.removeAt(index);});},) : Container(),
+
+            // CustomInput(
+            //   hint: "image link",
+            //   inputBorder: OutlineInputBorder(),
+            //   controller: photoController,
+            //   onChanged: (j){},
+            //
+            // ),
             Container(
               width: 100,
-              child: ElevatedButton(onPressed: (){
-                if (productModel.photos != null) {
-                  productModel.photos!.add(photoController.text.toString());
+              child: ElevatedButton(onPressed: () async {
+                if (productModel.photos != null && _imagePaths!=null) {
+
+                  UserState userState = BlocProvider.of<UserCubit>(context).state;
+
+                  if(userState is UserLoggedInState){
+                     var userId = userState.userModel.sId;
+                     List<String> imageUrls = await uploadAndReturnImageUrls(userId!, _imagePaths);
+                     productModel.photos = imageUrls;
+
+
+                  }
+                  // for (String imagePat in _imagePaths) {
+                  //   productModel.photos!.add(imagePat);
+                  // }
+
                 } else {
                   // Handle the case when photos is null, maybe initialize it or throw an error.
                   productModel.photos = [photoController.text.toString()];
                 }
-              }, child: Text('Add')),
+              }, child: Text('Confirm')),
             )
           ],
         ),
@@ -268,6 +289,21 @@ class _FormPageState extends State<FormPage> {
         color: color,
         fontWeight: FontWeight.normal,
         fontFamily: "Poppins");
+  }
+}
+
+Future<List<String>> uploadAndReturnImageUrls(String username, List<String> imagePaths) async {
+  try {
+    List<String> imageUrls = await FirebaseRepository().uploadImagesToFirebaseStorage(username, imagePaths);
+    return imageUrls;
+    print('Uploaded image URLs: $imageUrls');
+  } catch (e) {
+
+    print('Error uploading images and getting URLs: $e');
+    //upload default images if any error happen  // add only hyperlink  for images
+    List<String> imageUrls=[];
+    return imageUrls;
+
   }
 }
 

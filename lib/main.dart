@@ -2,6 +2,7 @@ import 'dart:developer';
 
 
 import 'package:bloc/bloc.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sellingportal/core/routes.dart';
@@ -29,9 +30,20 @@ import 'package:shared_preferences/shared_preferences.dart';
 void main() async{
   WidgetsFlutterBinding.ensureInitialized();
  // Preferences.clear();
+  await Firebase.initializeApp(
+    options:const FirebaseOptions(
+        apiKey: "AIzaSyC7ogpXLofv9ULVu--4dN-6xcyiHpWwvv0",
+        appId: "1:362981400076:android:b7c7ed7eb521b6b63dd829",
+        messagingSenderId: "362981400076",
+        projectId: "selly-b1801",
+        storageBucket: "gs://selly-b1801.appspot.com" ,
+    ),
+
+  );
   Bloc.observer = MyBlocObserver();
 
-  runApp(const MyApp());
+
+  runApp(const MyApp()); 
 }
 
 class MyApp extends StatelessWidget {
