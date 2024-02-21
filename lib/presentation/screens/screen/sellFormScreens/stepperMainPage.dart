@@ -129,6 +129,8 @@ class _FormPageState extends State<FormPage> {
 
                             List<String> imageUrls = await uploadAndReturnImageUrls(userId!, _imagePaths);
 
+                            Navigator.of(context).pop();
+
                             productModel.photos = imageUrls.isNotEmpty ? imageUrls : ["https://firebasestorage.googleapis.com/v0/b/selly-b1801.appspot.com/o/logo.png?alt=media&token=b7e5e875-eab8-4367-a0bc-1ef12c5a8495"];
                           }
                         }
@@ -136,6 +138,7 @@ class _FormPageState extends State<FormPage> {
                       }
                       catch(e){
                         print('An error occurred: $e');
+                        Navigator.of(context).pop();
                       }
 
                       setState(() {
