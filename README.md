@@ -1,7 +1,5 @@
 # Selling Portal
 
-## About Selling Portal
-
 The Selling Portal is a Flutter project designed specifically for college and hostel students, enabling them to buy or sell items across four categories: Books, Gadgets, Room Essentials, and Kitchen Appliances. This application addresses the common need for students living in paying guest accommodations (PGs) or outside their homes to sell items when they shift or buy items when they move in. Additionally, it facilitates the buying and selling of books among students who have finished using them.
 
 The Selling Portal boasts a beautiful and intuitive UI/UX, created with Flutter, ensuring a seamless and engaging experience for users. The frontend is developed with Flutter, providing support for both iOS and Android platforms, while the backend leverages Node.js with Express to handle server-side operations efficiently.
